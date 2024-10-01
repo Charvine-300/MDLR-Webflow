@@ -33,11 +33,13 @@
     </div>
   </div>
     </div>
+    <Cart />
 </template>
 
 <script setup lang="ts">
 import { useProductsStore } from '~/stores/product';
 import Card from '~/components/ui/Card.vue';
+import Cart from '~/components/Cart.vue';
 
 
 definePageMeta({

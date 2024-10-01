@@ -30,7 +30,7 @@ defineProps({
   display: -webkit-box;            /* Use flexbox model */
   -webkit-box-orient: vertical;   /* Define box orientation */
   overflow: hidden;                /* Hide overflow */
-  -webkit-line-clamp: 3;          /* Number of lines to clamp */
+  -webkit-line-clamp: 2;          /* Number of lines to clamp */
   max-height: 4.5em;              /* Adjust based on line-height (3 lines * line-height) */
 }
 </style>

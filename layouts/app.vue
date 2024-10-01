@@ -1,5 +1,6 @@
 <template>
-  <div class="body">
+  <div class="body relative">
+    <Cart />
     <Header />
     <div>
         <slot />
@@ -12,6 +13,7 @@
 <script setup lang="ts">
 import Footer from '~/components/ui/Footer.vue';
 import Header from '~/components/ui/Header.vue';
+import Cart from '~/components/Cart.vue';
 </script>
 
 <style scoped>

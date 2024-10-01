@@ -43,11 +43,13 @@ export const useProductsStore = defineStore('Product', {
             this.productDetails = null;
 
             const { $axios, $baseUrl } = useNuxtApp();
+            const cart = useCartStore();
 
             try {
                 const { data }= await $axios.get(`${$baseUrl}/products/${id}`);
-
                 this.productDetails = data;
+
+               cart.checkCartForItem(data.id);
             } catch (err) {
                 console.error(err);
             } finally {

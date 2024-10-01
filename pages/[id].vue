@@ -10,7 +10,14 @@
       <div class="product_price">{{ formatCurrency(productDetails.price) }}</div>
       <p class="product_description">{{ productDetails.description }}</p>
       <div>
-        <form data-node-type="commerce-add-to-cart-form" class="w-commerce-commerceaddtocartform"><label for="quantity-54ad9a0e0a51a3aa72ae06e76b969221">Quantity</label><input type="number" pattern="^[0-9]+$" inputmode="numeric" id="quantity-54ad9a0e0a51a3aa72ae06e76b969221" name="commerce-add-to-cart-quantity-input" min="1" class="w-commerce-commerceaddtocartquantityinput" value="1"><input type="submit" data-node-type="commerce-add-to-cart-button" data-loading-text="Adding to cart..." aria-busy="false" aria-haspopup="dialog" class="w-commerce-commerceaddtocartbutton button" value="Add to Cart"></form>
+        <form data-node-type="commerce-add-to-cart-form" class="w-commerce-commerceaddtocartform">
+          <label for="quantity-54ad9a0e0a51a3aa72ae06e76b969221">Quantity</label>
+          <input v-model="count" type="number" pattern="^[0-9]+$" inputmode="numeric" id="quantity-54ad9a0e0a51a3aa72ae06e76b969221" name="commerce-add-to-cart-quantity-input" min="1" class="w-commerce-commerceaddtocartquantityinput" >
+          <button aria-busy="false" class="w-commerce-commerceaddtocartbutton button" @click="cartAction" :disabled="cartBtnText === 'Added to cart'">
+  {{ cartBtnText }}
+</button>
+
+        </form>
         <div style="display:none" class="w-commerce-commerceaddtocartoutofstock" tabindex="0">
           <div>This product is out of stock.</div>
         </div>
@@ -24,24 +31,44 @@
 </template>
 
 <script setup lang="ts">
-    const { id } = useRoute().params as { id: string };
-    const productStore = useProductsStore();
-    const { productDetails, productsLoading } = storeToRefs(productStore);
+  const form = reactive({
+    countItem: 1
+  });
 
-definePageMeta({
+  const { id } = useRoute().params as { id: string };
+  const productStore = useProductsStore();
+  const cart = useCartStore();
+
+  const product = ref();
+  const { productDetails, productsLoading } = storeToRefs(productStore);
+  const { count, cartBtnText } = storeToRefs(cart);
+
+  const cartAction = (event: Event) => {
+    event.preventDefault();
+    cart.addToCart(product.value, count.value);
+  };
+
+  watch(count, (newCount) => {
+    cart.updateCount(newCount);
+  });
+
+  definePageMeta({
     layout: 'app',
-});
+  });
 
-useHead({
+  useHead({
     title: `MDLR - ${productDetails.value?.title}`,
-});
+  });
 
-
-onMounted(() => {
-    productStore.fetchProductDetails(id);
-})
+  onMounted(() => {
+    productStore.fetchProductDetails(id).then(() => {
+      product.value = productDetails.value;
+    });
+    form.countItem = count.value ?? 1;
+  })
 </script>
 
 <style scoped>
+
 
 </style>
