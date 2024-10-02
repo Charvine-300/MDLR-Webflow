@@ -56,9 +56,16 @@
     layout: 'app',
   });
 
-  useHead({
-    title: `MDLR - ${productDetails.value?.title}`,
-  });
+  watch(
+  () => productDetails.value,
+  (newProductDetails) => {
+    if (newProductDetails?.title) {
+      useHead({
+        title: `MDLR - ${newProductDetails.title}`,
+      });
+    }
+  }
+);
 
   onMounted(() => {
     productStore.fetchProductDetails(id).then(() => {
