@@ -14,7 +14,7 @@
     </nav>
     <div data-node-type="commerce-cart-open-link" class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart" @click="openCart">
         <img src="/assets/icons/bx-cart.svg" alt="">
-        <div class="w-commerce-commercecartopenlinkcount cart-quantity">0</div>
+        <div class="w-commerce-commercecartopenlinkcount cart-quantity">{{ cartItems?.length || 0 }}</div>
     </div>
     <div class="menu-button w-nav-button" >
       <img src="https://uploads-ssl.webflow.com/5c7b4529d99ee5d38a884f51/5c7ca89f9254e93c10c36dd8_bx-menu-alt-right.svg" alt=""></div>
@@ -24,6 +24,8 @@
 <script setup lang="ts">
 const route = useRoute();
 const cart = useCartStore();
+
+const { cartItems } = storeToRefs(cart);
 const openCart = cart.toggleCartVisibility;
 </script>
 

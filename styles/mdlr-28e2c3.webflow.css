@@ -133,7 +133,7 @@
 }
 
 .w-commerce-commercecartitem {
-  align-items: flex-start;
+  align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
   display: flex;
@@ -1368,7 +1368,7 @@ p {
 .remove {
   opacity: .3;
   color: #333;
-  margin-top: 8px;
+  margin: 8px 0;
   text-decoration: none;
 }
 
