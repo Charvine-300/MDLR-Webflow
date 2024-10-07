@@ -1,7 +1,7 @@
 <template>
      <div role="listitem" class="product w-dyn-item w-col w-col-3" >
           <NuxtLink :to="`/${item.id}`" class="link-block w-inline-block">
-            <img alt="" :src="item.images[0]" />
+            <img alt="" :src="typeof item.images[0] === 'string' && !item.images[0].startsWith('[') ? item.images[0] : 'assets/images/fallback-img.jpg'" />
             <div class="productinfo">
               <div class="productinfo_title line-clamp"> {{ item.title }} </div>
               <div class="productinfo_price">
@@ -27,10 +27,10 @@ defineProps({
 
 <style scoped>
 .line-clamp {
-  display: -webkit-box;            /* Use flexbox model */
-  -webkit-box-orient: vertical;   /* Define box orientation */
-  overflow: hidden;                /* Hide overflow */
-  -webkit-line-clamp: 2;          /* Number of lines to clamp */
-  max-height: 4.5em;              /* Adjust based on line-height (3 lines * line-height) */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  max-height: 4.5em;
 }
 </style>

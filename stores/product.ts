@@ -30,7 +30,7 @@ export const useProductsStore = defineStore('Product', {
                         }
                     });
     
-                    this.products = data;
+                    this.products = data.filter((item: ProductsInterface) => item.title !== 'New Product' && item.title !== 'Snip');
                 } catch (err) {
                     console.error(err);
                 } finally {
