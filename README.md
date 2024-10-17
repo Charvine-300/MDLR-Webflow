@@ -33,7 +33,7 @@ git clone https://github.com/Charvine-300/MDLR-Webflow.git
 - Navigate to the project root path:
 
 ```bash
-cd mdlr-webflow
+cd MDLR-Webflow
 ```
 
 - Install the essential packages after cloning the project and going to its root path.
